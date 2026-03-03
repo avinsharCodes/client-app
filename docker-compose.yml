@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  demo-spa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: demo-spa-app
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      # Identity Provider Settings
+      - AAAS_BASE_URL=https://auth.yourco.com
+      - AAAS_CLIENT_ID=demo-spa-client
+      - AAAS_CLIENT_SECRET=never-commit-this
+      - AAAS_REDIRECT_URI=http://localhost:3001/callback
+      # Generate a solid 32-byte hex for production and pass it here
+      - COOKIE_SECRET=32-byte-random-hex-string-for-dev
+    restart: unless-stopped
