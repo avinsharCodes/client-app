@@ -7,6 +7,7 @@
     "dev:spa": "vite",
     "dev:bff": "tsx bff/src/index.ts",
     "dev": "concurrently \"npm run dev:spa\" \"npm run dev:bff\"",
+    "start": "node bff/dist/index.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

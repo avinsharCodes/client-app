@@ -24,7 +24,17 @@ app.use('/bff', refreshRouter);
 app.use('/bff', userinfoRouter);
 app.use('/bff', logoutRouter);
 
+import path from 'path';
+
 app.get('/bff/health', (req, res) => res.sendStatus(200));
+
+// Serve React SPA statically
+const clientBuildPath = path.join(__dirname, '../../dist');
+app.use(express.static(clientBuildPath));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`BFF listening on port ${PORT}`));
